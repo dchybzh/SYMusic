@@ -1,0 +1,19 @@
+<!--components/song-item-v2/song-item-v2.wxml-->
+<!-- 点击热门歌单，推荐歌单，巅峰榜后进入的页面 -->
+<wxs module="fmt" src="/utils/format.wxs">
+  
+</wxs>
+<view class="item" wx:if="{{itemData.name}}" bindtap="onSongItemTap">
+  <view class="index">
+    {{index}}
+  </view>
+  <view class="info">
+    <view class="name">
+      {{itemData.name}}
+    </view>
+    <view class="source">
+      <image class="icon" src="/assets/images/icons/sq_icon.png" mode="widthFix"/>
+      <text class="singer">{{fmt.formatAdd(itemData)}}</text>
+    </view>
+  </view>
+</view>

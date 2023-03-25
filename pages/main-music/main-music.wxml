@@ -1,0 +1,54 @@
+<!--pages/main-music/main-music.wxml-->
+<!-- 1.Vant搜索框 -->
+<van-search value="{{ searchvalue }}" shape="round" background="#fafafa" placeholder="请输入搜索关键词" bind:click-input="onSearch" />
+
+<!-- 2.轮播图 -->
+<swiper circular indicator-dots class="banner" style="height: {{bannerHeight}}px;" wx:if="{{banners.length}}">
+  <block wx:for="{{banners}}" wx:key="targetId">
+    <swiper-item class="item">
+      <image class="banner-image" src="{{item.pic}}" mode="widthFix" bindload="onBannerImageload" />
+    </swiper-item>
+  </block>
+</swiper>
+
+<!-- 3.推荐歌曲的展示 -->
+<view class="recommend" wx:if="{{recommendSongs.length}}">
+  <!-- 使用组件 area-header -->
+  <area-header title="推荐歌曲" bind:moreclick="onRecommendMoreClick"></area-header>
+  <view class="list">
+    <block wx:for="{{recommendSongs}}" wx:key="id">
+      <!-- 使用组件 song-item-v1 -->
+      <song-item-v1 itemData="{{item}}" data-index="{{index}}" bindtap="onSongItemTap"></song-item-v1>
+    </block>
+  </view>
+</view>
+
+<!-- 4.热门歌单 -->
+<!-- <view class="hot-menu">
+  <area-header title="热门歌单"></area-header>
+  <scroll-view class="list" scroll-x style="width: {{screenWidth}}px">
+    <block wx:for="{{hotMenuList}}" wx:key="id">
+      <view class="item">
+        <menu-item itemData="{{item}}"></menu-item>
+      </view>
+    </block>
+  </scroll-view>
+</view> -->
+
+<menu-area title="热门歌单" menuList="{{hotMenuList}}"></menu-area>
+<menu-area title="推荐歌单" menuList="{{recMenuList}}"></menu-area>
+
+
+
+<!-- 6.巅峰榜 因为rankInfo是对象不能直接判断，所以设置了一个变量来判断-->
+<view class="ranking" wx:if="{{isRankData}}">
+  <area-header title="巅峰榜" hasMore="{{false}}"></area-header>
+  <view class="rank-list">
+    <block wx:for="{{rankInfo}}" wx:key="id">
+      <view class="item">
+      <!-- 遍历对象的时候，索引index是key -->
+        <rank-item itemData="{{item}}" key="{{index}}"></rank-item>
+      </view>
+    </block>
+  </view>
+</view>

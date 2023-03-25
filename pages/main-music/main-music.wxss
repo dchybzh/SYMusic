@@ -1,0 +1,25 @@
+/* pages/main-music/main-music.wxss */
+page {
+  /* 写法一：搜索框颜色 */
+  --search-background-color: #fff;
+  --search-padding: 20rpx 0;
+  box-sizing: border-box;
+  padding: 0 24rpx;
+}
+
+/* 写法二：搜索框颜色 */
+/* .van-search__content {
+  background-color: #fff !important;
+} */
+
+/* 2.轮播图样式 */
+.banner {
+  border-radius: 12rpx;
+  overflow: hidden;
+}
+
+.banner .item .banner-image {
+  width: 100%;
+}
+
+

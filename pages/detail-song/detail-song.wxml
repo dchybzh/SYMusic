@@ -1,0 +1,19 @@
+<!--pages/detail-song/detail-song.wxml-->
+<!-- 热门歌单和推荐歌，巅峰榜 单点击跳转后到详情页 -->
+<view class="header" wx:if="{{type === 'menu' && songInfo.name}}">
+  <!-- 组件：头部区域 -->
+  <menu-header itemData="{{songInfo}}"></menu-header>
+</view>
+
+<!-- 下方的具体歌单 -->
+<view class="title" wx:else>
+  {{songInfo.name}}
+</view>
+<view class="song-list">
+  <block wx:for="{{songInfo.tracks}}" wx:key="id">
+    <view class="item">
+      <!-- 使用组件 -->
+      <song-item-v2 itemData="{{item}}" index="{{index + 1}}" data-index="{{index}}" bindtap="onSongItemTap"></song-item-v2>
+    </view>
+  </block>
+</view>

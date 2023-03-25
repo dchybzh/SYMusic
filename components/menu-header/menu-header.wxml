@@ -1,0 +1,37 @@
+<!--components/menu-header/menu-header.wxml-->
+<!-- 热门歌单，推荐歌单，点击跳转到新页面的头部区域 -->
+<wxs module="fmt" src="../../utils/format.wxs">
+
+</wxs>
+<view class="menu-header">
+  <!-- 1.背景图片 -->
+  <image class="bg-image" src="{{itemData.coverImgUrl}}" mode="aspectFill" />
+  <view class="bg"></view>
+
+  <!-- 2.专辑内容 -->
+  <view class="album">
+    <image class="image" src="{{itemData.coverImgUrl}}" mode="widthFix" />
+    <!-- 2.2我脑子部分 -->
+    <view class="content">
+      <text class="name">{{itemData.name}}</text>
+      <view class="author">
+        <image class="avatar" src="{{itemData.creator.avatarUrl}}" mode="aspectFill" />
+        <text class="nickname">{{itemData.creator.nickname}}</text>
+      </view>
+      <text class="dec">简介: {{itemData.description}}</text>
+    </view>
+  </view>
+
+  <!-- 底部区域： 喜欢和分享 -->
+  <view class="bottom">
+    <view class="item">
+      <image class="icon" src="/assets/images/icons/favor_icon.png" mode="widthFix" />
+      <text>{{fmt.formatCount(itemData.subscribedCount)}}</text>
+    </view>
+    <view class="item">
+      <image class="icon" src="/assets/images/icons/share_icon.png" mode="widthFix" />
+      <text>分享</text>
+    </view>
+  </view>
+
+</view>

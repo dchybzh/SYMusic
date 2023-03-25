@@ -1,0 +1,105 @@
+/* components/menu-header/menu-header.wxss */
+.menu-header {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 450rpx;
+  color: #fff;
+  margin-bottom: 24rpx;
+}
+
+.bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  /* 模糊显示图片 */
+  /* filter: blur(2px); */
+}
+
+.bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  /* 模糊显示图片 */
+  background-color: rgba(0, 0, 0, .5);
+  backdrop-filter: blur(5px);
+  /* filter: blur(5px); */
+}
+
+.album {
+  display: flex;
+  padding: 60rpx 50rpx 0 50rpx;
+}
+
+.album .image {
+  width: 220rpx;
+  height: 220rpx;
+  border-radius: 15rpx;
+
+}
+
+.content {
+  position: relative;
+  height: 220rpx;
+  flex: 1;
+  margin-left: 50rpx;
+}
+.name {
+  font-size: 32rpx;
+}
+.author {
+  display: flex;
+  margin-top: 20rpx;
+  align-items: center;
+}
+
+.avatar {
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 25rpx;
+}
+
+.nickname {
+  font-size: 24rpx;
+  margin-left: 18rpx;
+}
+
+.content .dec {
+  position: absolute;
+  bottom: 0rpx;
+  left: 0rpx;
+  width: 100%;
+  height: 30rpx;
+  margin-top: 30rpx;
+  font-size: 24rpx;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 底部：喜欢 和 分享 */
+.bottom {
+  display: flex;
+  justify-content: space-around;
+  padding: 30rpx;
+  margin-top: 30rpx;
+}
+.bottom .item {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  width: 48rpx;
+  margin-right: 10rpx;
+}
+.text {
+  font-size: 28rpx;
+}

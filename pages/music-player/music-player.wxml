@@ -1,0 +1,61 @@
+<!--pages/music-player/music-player.wxml-->
+<!-- 歌曲详情播放页，1.背景展示 -->
+<image class="bg-image" src="{{currentSong.al.picUrl}}" mode="aspectFill" />
+<view class="bg-cover"></view>
+
+<!-- 2.自定义导航栏 -->
+<nav-bar bind:leftclick="onNavBackTap">
+  <view class="tabs" slot="center">
+    <block wx:for="{{pageTitles}}" wx:key="*this">
+      <view class="item {{currentPage === index ? 'active' : ''}}" bindtap="onNavTapItem" data-index="{{index}}">{{item}}</view>
+      <!-- 循环会显示两个分割线 ｜，所以这里做一个判断，index != 1 的时候显示， index = 1 的时候也就是第二轮循环开了，就不显示了 -->
+      <view class="division" wx:if="{{index !== pageTitles.length - 1}}">|</view>
+    </block>
+  </view>
+</nav-bar>
+
+<wxs module="fmt" src="/utils/format.wxs"></wxs>
+<!-- 3.具体内容 给swiper绑定index-->
+<swiper bindchange="onSwiperChange" style="height: {{contentHeight}}px;" current="{{currentPage}}">
+  <!-- 3.1.音乐页 -->
+  <swiper-item class="music">
+    <view class="album">
+      <image src="{{currentSong.al.picUrl}}" mode="widthFix" class="image" />
+    </view>
+    <view class="info">
+      <view class="name">{{currentSong.name}}</view>
+      <view class="singer">{{fmt.formatAdd(currentSong)}}</view>
+    </view>
+    <view class="lyric">
+      {{currentLyricText}}
+    </view>
+    <view class="progress">
+      <!-- 滑块大小，和进度 -->
+      <slider class="slider" block-size="12" value="{{sliderValue}}" bindchange="onSliderChange" bindchanging="onSliderChanging" />
+      <view class="time">
+        <view class="current">{{fmt.formatTime(currentTime)}}</view>
+        <view class="duration">{{fmt.formatTime(durationTime)}}</view>
+      </view>
+    </view>
+    <view class="controls">
+      <image src="/assets/images/player/play_{{playModeName}}.png" mode="" class="mode" bindtap="onModeBtnTap" />
+      <!-- <image wx:if="{{playModeIndex === 0}}" src="/assets/images/player/play_order.png" mode="" class="mode" bindtap="onModeBtnTap" />
+      <image wx:if="{{playModeIndex === 1}}" src="/assets/images/player/play_repeat.png" mode="" class="mode" bindtap="onModeBtnTap" />
+      <image wx:if="{{playModeIndex === 2}}" src="/assets/images/player/play_random.png" mode="" class="mode" bindtap="onModeBtnTap" /> -->
+      <image src="/assets/images/player/play_prev.png" mode="" class="btn prev" bindtap="onPrevBtnTap"/>
+      <image src="/assets/images/player/play_{{ isPlaying ? 'pause' : 'resume' }}.png" mode="" class="play" bindtap="onPlayOrPauseTap" />
+      <image src="/assets/images/player/play_next.png" mode="" class="btn next" bindtap="onNextBtnTap" />
+      <image src="/assets/images/player/play_music.png" mode="" class="btn list" />
+    </view>
+  </swiper-item>
+  <!-- -3.2- 歌词页 -->
+  <swiper-item>
+    <scroll-view class="lyric-list" scroll-y scroll-with-animation scroll-top="{{lyricScrollTop}}">
+      <block wx:for="{{lyricInfos}}" wx:key="time">
+        <view class="item {{currentLyricIndex === index ? 'active' : ''}}">
+          {{item.text}}
+        </view>
+      </block>
+    </scroll-view>
+  </swiper-item>
+</swiper>

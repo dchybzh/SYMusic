@@ -1,0 +1,34 @@
+/* components/nav-bar/nav-bar.wxss */
+/* 2.自定义导航栏。状态栏，一般高度是20px，最好别写死，导航栏一般是 44px */
+.nav {
+  display: flex;
+  height: 44px;
+}
+
+.left, .right, .center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+.nav .left, .nav .right {
+  width: 120rpx;
+}
+.nav .center {
+  flex: 1;
+}
+
+/* 控制内容显示 */
+.left .default .icon {
+  color: #fff;
+  font-size: 40rpx;
+  vertical-align: middle;
+}
+
+.default {
+  display: none;
+}
+
+.slot:empty + .default {
+  display: block;
+}

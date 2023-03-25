@@ -1,0 +1,138 @@
+/* pages/music-player/music-player.wxss */
+
+.bg-image, .bg-cover {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+/* 1.背景毛玻璃效果 */
+.bg-cover {
+  background-color: rgba(0,0,0,.3);
+  backdrop-filter: blur(20px);
+}
+
+/* 2.导航栏中的center */
+.tabs {
+  display: flex;
+  color:#aaa;
+}
+.tabs .division {
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+}
+.tabs .active {
+  color: #fff;
+}
+
+/* 歌曲布局 */
+.music {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 40rpx 60rpx;
+  font-size: 28rpx;
+  color: #fff;
+}
+
+.music .album {
+  flex: 1;
+}
+
+.music .album .image {
+  width: 100%;
+  border-radius: 12rpx;
+}
+
+.music .info .name{
+  font-size: 48rpx;
+  font-weight: 700;
+}
+
+.music .info .singer {
+  font-size: 25rpx;
+  margin: 12rpx 0;
+}
+
+.music .lyric {
+  text-align: center;
+  margin: 12rpx 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.music .progress {
+  margin: 12rpx 0;
+} 
+
+.music  .progress .slider {
+  margin: 16rpx 12rpx 10rpx 14rpx;
+}
+
+.music .progress .time {
+  display: flex;
+  justify-content: space-between;
+  font-size: 24rpx;
+}
+
+.music .controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+.music .controls .btn {
+  width: 60rpx;
+  height: 60rpx;
+}
+.mode{
+  width: 80rpx;
+  height: 80rpx;
+}
+.play{
+  width: 120rpx;
+  height: 120rpx;
+}
+
+/* 歌词样式 */
+.lyric-list {
+  color: #fff;
+  font-size: 28rpx;
+  text-align: center;
+  height: 100%;
+  padding: 40rpx;
+  box-sizing: border-box;
+
+}
+
+/* scroll-view 默认会有滚动条，清除需要用伪元素 */
+.lyric-list ::-webkit-scrollbar {
+  display: none;
+}
+
+.lyric-list .item {
+  /* 为解决文字重叠问题，取消item高度样式 */
+  /* height: 35px; */
+  line-height: 70rpx;
+  /* 文字换行，keep-all 只能在半角空格或连字符处进行换行 */
+  word-break: keep-all; 
+}
+
+/* 这里必须既有item 又有active，所以不能加空格 */
+.lyric-list .item.active {
+  color: #4df369;
+  font-size: 33rpx;
+} 
+
+/* 歌词的第一个item */
+.lyric-list .item:first-of-type {
+  margin-top: 100%;
+}
+
+.lyric-list .item:last-of-type {
+  padding-bottom: 100%;
+}

@@ -1,0 +1,14 @@
+<!--components/menu-item/menu-item.wxml-->
+<!-- 热门歌单组件 -->
+<wxs module="fmt" src="/utils/format.wxs"></wxs>
+<view class="menu-item" bindtap="onMenuItemTap">
+  <view class="top">
+    <image class="image" src="{{itemData.coverImgUrl}}" mode="widthFix" />
+    <view class="count">
+      {{fmt.formatCount(itemData.playCount)}}
+    </view>
+  </view>
+  <view class="bottom">
+    {{itemData.name}}
+  </view>
+</view>

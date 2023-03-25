@@ -1,0 +1,42 @@
+// 1.添加单位
+function formatCount(count) {
+  // 为防止传过来的是字符串，先转化一下
+  numCount = Number(count)
+  // 判断，如果大于1亿，取小数一位
+  if (numCount > 100000000) {
+    return (numCount / 100000000).toFixed(1) + '亿'
+  } else if (numCount > 10000) {
+    return (numCount / 10000).toFixed(1) + '万'
+  } else {
+    return numCount
+  }
+}
+
+
+// 2.转换时间
+function formatTime(time) {
+  // 把时间毫秒转换成秒
+  var time = time / 1000
+  var minute = Math.floor(time / 60)
+  var sec = Math.floor(time) % 60
+  return transform(minute) + ':' + transform(sec)
+}
+
+function transform(n) {
+  return n < 10 ? '0' + n : n
+}
+
+// 3.多个演唱者之间添加 "-"
+function formatAdd(itemData) {
+  if (itemData.ar.length > 1) {
+    return itemData.ar[0].name + "-" + itemData.ar[1].name
+  } else {
+    return itemData.ar[0].name
+  }
+}
+// 必须导出后，才能被其他地方调用，必须使用CommonJS导出
+module.exports = {
+  formatTime: formatTime,
+  formatCount: formatCount,
+  formatAdd: formatAdd
+}
