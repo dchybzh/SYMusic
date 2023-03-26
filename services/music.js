@@ -20,7 +20,7 @@ export function getPlaylistDetail(id) {
 }
 
 // 3.热门歌单
-export function hotMenu(cat=" 全部", limit=6, offset=0) {
+export function hotMenu(cat="全部", limit=6, offset=0) {
   return myRequest.get({
     url: '/top/playlist',
     data: {

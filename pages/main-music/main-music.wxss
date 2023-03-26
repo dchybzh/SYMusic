@@ -22,4 +22,69 @@ page {
   width: 100%;
 }
 
+/* 底部播放条 */
+.playBar-holder {
+  height: 70rpx;
+}
+.playerBar {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  height: 65rpx;
+  width: 100%;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 8rpx;
+}
 
+.playerBar .left {
+  display: flex;
+}
+
+.playerBar .left .album {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  position: relative;
+  left: 10rpx;
+  top: -20rpx;
+}
+
+.playerBar .left .name {
+  display: flex;
+  align-items: center;
+  margin-left: 20rpx;
+  font-size: 28rpx;
+}
+
+.playerBar .right {
+  display: flex;
+  align-items: center;
+}
+
+.playerBar .right .icon {
+  padding-right: 10rpx;
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.playerBar .right .icon:last-of-type {
+  width: 50rpx;
+  height: 50rpx;
+}
+
+@keyframes rotateAnim {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.album-anim {
+  animation: rotateAnim 10s linear infinite;
+}

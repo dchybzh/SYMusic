@@ -1,20 +1,31 @@
 // pages/detail-search/detail-search.js
+import { getSearchSong, getSearchSongSuggest, getSearchSongDetail } from "../../services/search"
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    hotSearch: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-
+    this.fetchSeachSong()
+  },
+  async fetchSeachSong() {
+    const res = await getSearchSong()
+    console.log(res);
+    this.setData({hotSearch: res.result.hots})
   },
 
+  // async onSearch(e) {
+  //   const res = await getSearchSongDetail()
+  //   console.log(res, '----res----');
+  //   console.log(e);
+  // },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

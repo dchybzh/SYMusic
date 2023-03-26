@@ -40,15 +40,35 @@
 
 
 
-<!-- 6.巅峰榜 因为rankInfo是对象不能直接判断，所以设置了一个变量来判断-->
+<!-- 5.巅峰榜 因为rankInfo是对象不能直接判断，所以设置了一个变量来判断-->
 <view class="ranking" wx:if="{{isRankData}}">
   <area-header title="巅峰榜" hasMore="{{false}}"></area-header>
   <view class="rank-list">
     <block wx:for="{{rankInfo}}" wx:key="id">
       <view class="item">
-      <!-- 遍历对象的时候，索引index是key -->
+        <!-- 遍历对象的时候，索引index是key -->
         <rank-item itemData="{{item}}" key="{{index}}"></rank-item>
       </view>
     </block>
+  </view>
+</view>
+
+<!-- 6.底部播放工具栏 -->
+
+<!-- <view class="playList"> -->
+  <!-- <play-list itemData="{{playSongList}}" playModeName="{{playModeName}}" bind:playListTap="onPlayListTap" bind:IconBtnTap="onIconBtnTap" wx:if="{{isShow}}"></play-list> -->
+<!-- </view> -->
+
+<view class="playBar-holder" wx:if="{{currentSong.name || isPlaying}}"></view>
+<view class="playerBar" wx:if="{{currentSong.name || isPlaying}}">
+  <view class="left" bindtap="onPlayBarAlbumTap">
+    <image class="album album-anim" style="animation-play-state: {{isPlaying ? 'running' : 'paused'}};" src="{{currentSong.al.picUrl}}" mode="widthFix" />
+    <view class="name">
+      {{currentSong.name}}
+    </view>
+  </view>
+  <view class="right">
+    <image class="icon" bindtap="onPlayOrPauseBtnTap" src="/assets/images/music/{{isPlaying ? 'pause' : 'play'}}_icon.png" mode="widthFix" />
+    <image class="icon" bindtap="onPlayListBtnTap" src="/assets/images/music/playlist_icon.png" mode="widthFix" />
   </view>
 </view>

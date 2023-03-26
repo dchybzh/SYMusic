@@ -52,7 +52,9 @@
   <swiper-item>
     <scroll-view class="lyric-list" scroll-y scroll-with-animation scroll-top="{{lyricScrollTop}}">
       <block wx:for="{{lyricInfos}}" wx:key="time">
-        <view class="item {{currentLyricIndex === index ? 'active' : ''}}">
+        <view class="item {{currentLyricIndex === index ? 'active' : ''}}"
+        style="padding-top: {{index === 0 ? (contentHeight/2) : 0}}px; padding-bottom: {{index === lyricInfos.length - 1 ? (contentHeight/2) : 0}}px;"
+        >
           {{item.text}}
         </view>
       </block>

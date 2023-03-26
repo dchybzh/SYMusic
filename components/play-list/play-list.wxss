@@ -1,0 +1,47 @@
+/* components/play-list/play-list.wxss */
+.bg-cover {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgb(221, 221, 221);
+  background-attachment:fixed
+}
+
+/* 播放列表 */
+.playList {
+  width: 60%;
+  height: 50%;
+  position: fixed;
+  right: 0;
+  bottom: 60rpx;
+  background-color: #fff;
+  padding: 20rpx 30rpx;
+  font-size: 30rpx;
+  color: rgb(59, 59, 59);
+  z-index: 999;
+  overflow:scroll;
+}
+
+.playList .info {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgb(226, 226, 226);
+  height: 60rpx;
+  line-height: 60rpx;
+  vertical-align: middle;
+  padding-bottom: 20rpx;
+  margin-bottom: 15rpx;
+}
+
+.playList .icon {
+  display: flex;
+  margin-right: 30rpx;
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.playList .item {
+  margin: 30rpx 0;
+}

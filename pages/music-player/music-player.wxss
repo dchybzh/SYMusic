@@ -129,10 +129,10 @@
 } 
 
 /* 歌词的第一个item */
-.lyric-list .item:first-of-type {
+/* .lyric-list .item:first-of-type {
   margin-top: 100%;
 }
 
 .lyric-list .item:last-of-type {
   padding-bottom: 100%;
-}
+} */

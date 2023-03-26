@@ -1,0 +1,16 @@
+<!--components/play-list/play-list.wxml-->
+<view class="bg-cover"></view>
+<view class="playList">
+  <view class="info">
+    <image class="icon" bindtap="onIconBtnTap" src="/assets/images/player/play-{{playModeName}}.png" mode="widthFix" />
+    <text class="title">播放列表</text>
+  </view>
+  <view class="bottom" bindtap="onPlayListTap">
+    <block wx:for="{{itemData}}" wx:key="id">
+      <view class="item" data-index="{{index}}">
+        {{item.name}}
+      </view>
+    </block>
+      
+  </view>
+</view>

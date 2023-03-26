@@ -1,2 +1,11 @@
 <!--pages/detail-search/detail-search.wxml-->
-<text>pages/detail-search/detail-search.wxml</text>
+<!-- 1.Vant搜索框 -->
+<van-search value="{{ searchvalue }}" shape="round" background="#fafafa" placeholder="请输入搜索关键词" bind:search="onSearch" />
+<view class="hot-search">
+  <view class="title">热门搜索</view>
+  <block wx:for="{{hotSearch}}" wx:key="*this">
+    <view class="item">
+      {{item.first}}
+    </view>
+  </block>
+</view>

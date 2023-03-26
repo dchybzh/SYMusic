@@ -10,6 +10,9 @@ import playerStore from '../../store/playerStore'
 const querySelectThrottle = throttle(querySelect, 50)
 // 为获取全局共享数据拿到app
 const app = getApp()
+const modeName2 = ["order2", "repeat2", "random2"]
+// let isShow = false
+
 Page({
 
   /**
@@ -25,7 +28,17 @@ Page({
     recMenuList: [],  //推荐歌单
     // 巅峰榜数据
     isRankData: false,
-    rankInfo: {}
+    rankInfo: {},
+
+    currentSong: [], // 当前正在播放的歌曲信息
+    playSongIndex: 0,
+    playSongList: [],
+    isPlaying: false,
+    isShow: false, // 显示播放列表
+
+    show: false,
+
+    playModeName: 'order2'
 
   },
 
@@ -38,6 +51,7 @@ Page({
     // 3.请求推荐歌曲
     // this.fetchRecommendSongs()
 
+    // playerStore.dispatch("playMusicWithSongIdAction", 233931)
     // 4.获取热门歌单
     this.fetchHotMenuList()
 
@@ -50,7 +64,7 @@ Page({
     // rankStore.onState("originRank",this.handleOriginRank)
     // rankStore.onState("upRank",this.handleUpRank)
     for (const key in rankMap) {
-      rankStore.onState(key,this.getRankHandler(key))
+      rankStore.onState(key, this.getRankHandler(key))
     }
     // rankStore.onState("newRank",this.getRankHandler("newRank"))
     // rankStore.onState("originRank",this.getRankHandler("originRank"))
@@ -58,6 +72,8 @@ Page({
 
     // 发起action
     rankStore.dispatch("fetchRankDataAction")
+
+    playerStore.onStates(["currentSong", "isPlaying", "playSongIndex", "playSongList", "playModeIndex"], this.handlePlayInfos)
 
     // 从全局数据globalData中获取屏幕尺寸
     this.setData({
@@ -96,7 +112,8 @@ Page({
       url: '/pages/detail-song/detail-song?type=recommend',
     })
   },
-  // 点击推荐歌曲，获取歌曲列表和当前索引，并存入palyerStore 中，以便在播放页共用
+
+  // 5.点击推荐歌曲，获取歌曲列表和当前索引，并存入palyerStore 中，以便在播放页共用
   onSongItemTap(e) {
     // console.log(e);
     const index = e.currentTarget.dataset.index
@@ -106,6 +123,37 @@ Page({
     playerStore.setState('playSongList', this.data.recommendSongs)
     playerStore.setState('playSongIndex', index)
   },
+
+  // 监听底部播放栏
+  onPlayOrPauseBtnTap() {
+    playerStore.dispatch("changeMusicStatusAction")
+  },
+
+  onPlayBarAlbumTap() {
+    wx.navigateTo({
+      url: '/pages/music-player/music-player',
+    })
+  },
+  // 监听点击播放列表的循环播放icon
+  onIconBtnTap() {
+    playerStore.dispatch("changePlayModeAction")
+  },
+  // 点击具体歌曲
+  // onPlayListTap(e) {
+  //   console.log(e, '---e--- ');
+  // },
+  onPlayListBtnTap() {
+    var sh = this.data.isShow
+    if (!sh) {
+      this.setData({ isShow: !sh })
+      // console.log('---点击--1', this.data.isShow);
+
+    } else {
+      this.setData({ isShow: !sh })
+      // console.log('---点击--2', this.data.isShow); 
+    }
+  },
+
 
   // ---------- 发送请求获取数据 --------
   // 2.发送请求，请求banner图
@@ -166,12 +214,31 @@ Page({
   getRankHandler(ranking) {
     return (value) => {
       if (!value.name) return
-      this.setData({isRankData: true})
-      const newrankInfo = {...this.data.rankInfo, [ranking]: value}
-      this.setData({rankInfo: newrankInfo})
+      this.setData({ isRankData: true })
+      const newrankInfo = { ...this.data.rankInfo, [ranking]: value }
+      this.setData({ rankInfo: newrankInfo })
     }
   },
-
+  handlePlayInfos({ currentSong, isPlaying, playSongIndex, playSongList, playModeIndex }) {
+    if (currentSong) {
+      // console.log(currentSong);
+      this.setData({ currentSong })
+    }
+    if (isPlaying !== undefined) {
+      this.setData({ isPlaying })
+    }
+    if (playSongIndex !== undefined) {
+      this.setData({ playSongIndex })
+    }
+    if (playSongList !== undefined) {
+      // console.log(playSongList, "--playSongList--");
+      this.setData({ playSongList })
+    }
+    if (playModeIndex !== undefined) {
+      this.setData({ playModeName: modeName2[playModeIndex] })
+      // console.log(playModeIndex, this.data.playModeName, '---playModeName---');
+    }
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -203,8 +270,11 @@ Page({
     // rankStore.offState("upRank",this.handleUpRank)
 
     for (const key in rankMap) {
-      rankStore.offState(key,this.getRankHandler(key))
+      rankStore.offState(key, this.getRankHandler(key))
     }
+
+    playerStore.offStates(["currentSong", "isPlaying", "playSongIndex", "playSongList", "playModeIndex"], this.handlePlayInfos)
+
   },
 
   /**
